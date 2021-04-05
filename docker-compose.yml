@@ -1,0 +1,42 @@
+version: '3.4'
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    environment:
+      THIS_DOCKER_HOST: host
+      DOCKER_HOST: host.docker.internal
+    stdin_open: true
+    tty: true
+    ports:
+      - "3002:80"
+    # Descomentar si no usas MacOS y colocar tu ip
+    #extra_hosts:
+    #  - "host.docker.internal:192.168.0.21"
+
+  web:
+    build: 
+      dockerfile: $PWD/front/Dockerfile
+      context: $PWD/front
+    volumes:
+      - $PWD/front:/app
+    stdin_open: true
+    tty: true
+    entrypoint: /bin/ash
+    ports:
+      - "3001:3000"
+    #extra_hosts:
+    #  - "host.docker.internal:192.168.0.21"
+
+  api:
+    build: 
+      dockerfile: $PWD/backend/Dockerfile
+      context: $PWD/backend
+    volumes:
+      - $PWD/backend:/app
+    ports:
+      - "3000:3000"
+    #extra_hosts:
+    #  - "host.docker.internal:192.168.0.21"
