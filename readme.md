@@ -12,12 +12,6 @@ Run:
 ```sh
 $ docker-compose up --build
 ```
-to start the front (remember node_modules should be installed outside of container):
-
-```sh
-$ docker-compose exec web ash
-$ yarn start
-```
 
 Then you can use the proxy:
 - `PORT:3002 /api/xxxx for rails api ( you dont need to use /api in your services resource)`
@@ -54,7 +48,7 @@ Note: if you use proxy need add prefix /api and use port 3002
    response:
    ```json
      {
-      id: "1",
+      "id": "1",
       "resource": "/users/1"
      }
    ```
@@ -67,5 +61,5 @@ Note: if you use proxy need add prefix /api and use port 3002
         "gender": "male",
         "birth_date": "1990-12-19",
         "image_url": "url"
-      },
+      }
    ```
