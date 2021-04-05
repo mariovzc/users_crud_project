@@ -24,9 +24,10 @@ services:
       - $PWD/front:/app
     stdin_open: true
     tty: true
-    entrypoint: /bin/ash
+    #entrypoint: /bin/ash
     ports:
       - "3001:3000"
+    command: yarn start
     #extra_hosts:
     #  - "host.docker.internal:192.168.0.21"
 
@@ -36,6 +37,8 @@ services:
       context: $PWD/backend
     volumes:
       - $PWD/backend:/app
+    command: rails db:migrate
+    command: rails server -b 0.0.0.0
     ports:
       - "3000:3000"
     #extra_hosts:

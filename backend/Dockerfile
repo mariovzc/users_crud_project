@@ -9,11 +9,11 @@ COPY Gemfile Gemfile.lock ./
 RUN gem install bundler:1.17.2
 RUN bundle update --bundler
 RUN bundle install
+RUN rails db:migrate
 # We copy all the files from our current application to the /app container
 COPY . .
 # We expose the port
 EXPOSE 3000
-RUN rails db:migrate
 
 # Start the main process.
 CMD ["rails", "server", "-b", "0.0.0.0"]
